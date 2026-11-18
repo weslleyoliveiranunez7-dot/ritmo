@@ -38,3 +38,26 @@ h1{font-size:clamp(2.2rem,9vw,4rem);letter-spacing:.02em;
 .volume{display:flex;align-items:center;gap:10px;font-size:.9rem}
 .volume input{flex:1}
 input[type=range]{accent-color:var(--destaque);width:100%;min-height:28px}
+
+/* Batida e calibração (Etapa 3) */
+.btn-direita{left:auto;right:12px}
+.folha{position:absolute;left:0;right:0;bottom:0;max-height:68%;overflow-y:auto;display:flex;flex-direction:column;gap:10px;
+  padding:12px 14px calc(14px + var(--safe-b));background:rgba(18,11,36,.96);border-top:1px solid var(--apoio);z-index:5}
+.folha[hidden]{display:none}
+.folha-topo{display:flex;justify-content:space-between;align-items:center}
+.campo{display:flex;flex-direction:column;gap:4px;font-size:.9rem}
+.ctl{display:flex;gap:6px;align-items:stretch}
+.ctl input[type=number]{flex:1;min-width:0;min-height:44px;border-radius:10px;border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.08);color:var(--texto);font:inherit;font-size:1.05rem;text-align:center}
+.btn.mini{flex:0 0 auto;min-height:44px;min-width:44px;padding:0 10px}
+.calib{display:flex;flex-direction:column;gap:8px;padding-top:6px;border-top:1px solid rgba(255,255,255,.2)}
+.dica{font-size:.85rem;opacity:.8}
+.toque{min-height:96px;border:0;border-radius:18px;font:inherit;font-size:1.2rem;font-weight:700;color:#1a0b2e;
+  background:var(--destaque);box-shadow:0 0 22px rgba(255,79,163,.45);touch-action:manipulation;cursor:pointer}
+.toque:disabled{opacity:.4}
+.toque:active{transform:scale(.98)}
+.toque:focus-visible{outline:3px solid var(--apoio);outline-offset:3px}
+
+/* Seletor de arquivo nativo (o <label> abre o seletor sem depender de clique via JS) */
+.btn-label{display:flex;align-items:center;justify-content:center;text-align:center}
+.oculto{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
