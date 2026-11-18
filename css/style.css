@@ -1,1 +1,23 @@
-
+:root{
+  --fundo:#120b24; --fundo-2:#1f1240; --texto:#f3ecff;
+  --destaque:#ff4fa3; --apoio:#4fe3ff;
+  --safe-t:env(safe-area-inset-top,0px); --safe-b:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--fundo);color:var(--texto);
+  font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;overflow:hidden;touch-action:manipulation}
+#app{position:fixed;inset:0}
+.tela{position:absolute;inset:0;display:none}
+.tela.ativa{display:flex}
+#tela-inicial{flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;text-align:center;
+  background:radial-gradient(ellipse at 50% 100%,var(--fundo-2),var(--fundo) 70%)}
+h1{font-size:clamp(2.2rem,9vw,4rem);letter-spacing:.02em;
+  text-shadow:0 0 18px var(--destaque),0 0 2px var(--apoio)}
+.sub{max-width:28ch;opacity:.85;line-height:1.4}
+.btn-principal{min-height:56px;padding:0 36px;border:0;border-radius:14px;font:inherit;font-size:1.15rem;font-weight:700;
+  color:#1a0b2e;background:var(--apoio);box-shadow:0 0 22px rgba(79,227,255,.45);cursor:pointer}
+.btn-principal:focus-visible,.btn-voltar:focus-visible{outline:3px solid var(--destaque);outline-offset:3px}
+.etapa{font-size:.8rem;opacity:.55;margin-top:12px}
+#palco{width:100%;height:100%;display:block}
+.btn-voltar{position:absolute;top:calc(12px + var(--safe-t));left:12px;min-height:44px;padding:0 18px;
+  border:1px solid rgba(255,255,255,.35);border-radius:10px;background:rgba(18,11,36,.6);color:var(--texto);font:inherit;cursor:pointer}
