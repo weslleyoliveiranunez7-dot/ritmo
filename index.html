@@ -12,14 +12,33 @@
     <h1>Jogo de Ritmo</h1>
     <p class="sub">A música move o mundo. Você bate no tempo.</p>
     <button id="btn-jogar" class="btn-principal">Entrar na cena</button>
-    <p class="etapa">Etapa 1 · base do projeto</p>
+    <p class="etapa">Etapa 2 · protótipo de música</p>
   </section>
 
   <section id="tela-cena" class="tela">
     <canvas id="palco"></canvas>
     <button id="btn-voltar" class="btn-voltar" aria-label="Voltar ao menu">Menu</button>
+
+    <div class="painel" role="group" aria-label="Controles da música">
+      <div class="info">
+        <span id="nome-musica" class="nome">Nenhuma música</span>
+        <span id="tempo" class="tempo">0:00 / 0:00</span>
+      </div>
+      <p id="aviso" class="aviso" role="status"></p>
+      <input id="progresso" type="range" min="0" max="1000" value="0" aria-label="Posição da música" disabled>
+      <div class="linha">
+        <button id="btn-arquivo" class="btn">Escolher música</button>
+        <button id="btn-tocar" class="btn btn-destaque" disabled>Tocar</button>
+        <button id="btn-reiniciar" class="btn" disabled>Reiniciar</button>
+      </div>
+      <label class="volume">Volume
+        <input id="volume" type="range" min="0" max="100" value="80" aria-label="Volume">
+      </label>
+      <input id="arquivo" type="file" accept="audio/*" hidden>
+    </div>
   </section>
 </main>
+<script src="js/audio.js"></script>
 <script src="js/scene.js"></script>
 <script src="js/main.js"></script>
 </body>
