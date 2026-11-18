@@ -12,12 +12,52 @@
     <h1>Jogo de Ritmo</h1>
     <p class="sub">A música move o mundo. Você bate no tempo.</p>
     <button id="btn-jogar" class="btn-principal">Entrar na cena</button>
-    <p class="etapa">Etapa 2 · protótipo de música</p>
+    <p class="etapa">Etapa 3 · batida e calibração</p>
   </section>
 
   <section id="tela-cena" class="tela">
     <canvas id="palco"></canvas>
     <button id="btn-voltar" class="btn-voltar" aria-label="Voltar ao menu">Menu</button>
+    <button id="btn-batida" class="btn-voltar btn-direita">Batida</button>
+
+    <div id="folha" class="folha" hidden role="dialog" aria-label="Batida e calibração">
+      <div class="folha-topo"><strong>Batida e calibração</strong><button id="btn-fechar" class="btn mini">Fechar</button></div>
+      <div class="campo"><label for="bpm">BPM</label>
+        <div class="ctl">
+          <button class="btn mini" data-campo="bpm" data-passo="-1">−1</button>
+          <input id="bpm" type="number" step="0.01" min="40" max="240" inputmode="decimal">
+          <button class="btn mini" data-campo="bpm" data-passo="1">+1</button>
+          <button class="btn mini" id="bpm-metade">÷2</button><button class="btn mini" id="bpm-dobro">×2</button>
+        </div></div>
+      <div class="campo"><label for="offset">Início da 1ª batida (ms)</label>
+        <div class="ctl">
+          <button class="btn mini" data-campo="offsetMs" data-passo="-10">−10</button>
+          <input id="offset" type="number" step="1" inputmode="numeric">
+          <button class="btn mini" data-campo="offsetMs" data-passo="10">+10</button>
+        </div></div>
+      <div class="campo"><label for="ajuste">Ajuste de sincronia (ms)</label>
+        <div class="ctl">
+          <button class="btn mini" data-campo="ajusteMs" data-passo="-10">−10</button>
+          <input id="ajuste" type="number" step="1" inputmode="numeric">
+          <button class="btn mini" data-campo="ajusteMs" data-passo="10">+10</button>
+        </div></div>
+      <label class="volume"><input id="metronomo" type="checkbox"> Metrônomo (clique em cada batida)</label>
+      <div class="linha">
+        <button id="folha-tocar" class="btn btn-destaque" disabled>Tocar</button>
+        <button id="btn-detectar" class="btn" disabled>Detectar BPM</button>
+      </div>
+      <div class="calib">
+        <strong>Calibrar por toques</strong>
+        <p class="dica">Com a música tocando, toque no botão a cada batida (mínimo 6 toques).</p>
+        <button id="calib-toque" class="toque" disabled>Toque na batida</button>
+        <p id="calib-info" class="dica" role="status">0 toques</p>
+        <div class="linha">
+          <button id="calib-aplicar" class="btn btn-destaque" disabled>Aplicar</button>
+          <button id="calib-limpar" class="btn">Limpar</button>
+        </div>
+      </div>
+      <p id="folha-aviso" class="aviso" role="status"></p>
+    </div>
 
     <div class="painel" role="group" aria-label="Controles da música">
       <div class="info">
@@ -27,18 +67,20 @@
       <p id="aviso" class="aviso" role="status"></p>
       <input id="progresso" type="range" min="0" max="1000" value="0" aria-label="Posição da música" disabled>
       <div class="linha">
-        <button id="btn-arquivo" class="btn">Escolher música</button>
+        <label id="btn-arquivo" class="btn btn-label" for="arquivo">Escolher música</label>
         <button id="btn-tocar" class="btn btn-destaque" disabled>Tocar</button>
         <button id="btn-reiniciar" class="btn" disabled>Reiniciar</button>
       </div>
       <label class="volume">Volume
         <input id="volume" type="range" min="0" max="100" value="80" aria-label="Volume">
       </label>
-      <input id="arquivo" type="file" accept="audio/*" hidden>
+      <input id="arquivo" class="oculto" type="file" accept="audio/*,.mp3,.wav,.ogg,.m4a,.aac,.flac">
     </div>
   </section>
 </main>
+<script src="js/analise.js"></script>
 <script src="js/audio.js"></script>
+<script src="js/beat.js"></script>
 <script src="js/scene.js"></script>
 <script src="js/main.js"></script>
 </body>
