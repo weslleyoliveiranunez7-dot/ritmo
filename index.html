@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Jogo de Ritmo</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main id="app">
+  <section id="tela-inicial" class="tela ativa">
+    <h1>Jogo de Ritmo</h1>
+    <p class="sub">A música move o mundo. Você bate no tempo.</p>
+    <button id="btn-jogar" class="btn-principal">Entrar na cena</button>
+    <p class="etapa">Etapa 1 · base do projeto</p>
+  </section>
+
+  <section id="tela-cena" class="tela">
+    <canvas id="palco"></canvas>
+    <button id="btn-voltar" class="btn-voltar" aria-label="Voltar ao menu">Menu</button>
+  </section>
+</main>
+<script src="js/scene.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
