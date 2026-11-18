@@ -21,6 +21,36 @@ const Cena = (() => {
     return s / ((ate - de) * 255);
   }
 
+  // Régua de batidas: as marcas vão em direção à linha central; a batida acontece quando cruzam.
+  function desenharReferencia(chao) {
+    if (!Musica.carregada) return;
+    const agora = Batida.agora(), spb = Batida.spb, off = Batida.offset;
+    const cx = largura / 2, y = 104, alcance = 2, meia = largura * 0.44;
+    ctx.strokeStyle = 'rgba(243,236,255,.25)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(cx - meia, y); ctx.lineTo(cx + meia, y); ctx.stroke();
+
+    for (let k = Math.max(0, Math.ceil((agora - alcance - off) / spb)); ; k++) {
+      const tb = off + k * spb;
+      if (tb > agora + alcance) break;
+      const x = cx + ((tb - agora) / alcance) * meia;
+      const forte = k % 4 === 0, h = forte ? 26 : 14;
+      ctx.strokeStyle = forte ? '#ffd84f' : '#4fe3ff';
+      ctx.globalAlpha = 1 - Math.abs(tb - agora) / alcance * 0.8;
+      ctx.lineWidth = forte ? 4 : 3;
+      ctx.beginPath(); ctx.moveTo(x, y - h / 2); ctx.lineTo(x, y + h / 2); ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+
+    // Linha central e anel que pulsa a cada batida
+    const k = (agora - off) / spb;
+    const flash = k >= 0 ? Math.pow(1 - (k - Math.floor(k)), 3) : 0;
+    ctx.strokeStyle = '#ff4fa3'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(cx, y - 20); ctx.lineTo(cx, y + 20); ctx.stroke();
+    ctx.globalAlpha = flash;
+    ctx.beginPath(); ctx.arc(cx, y, 14 + (1 - flash) * 22, 0, Math.PI * 2); ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+
   function desenhar() {
     const dados = Musica.espectro();
     const alvoGraves = dados ? media(dados, 1, 6) : 0;
@@ -60,6 +90,8 @@ const Cena = (() => {
     const escala = 1 + graves * 0.25;
     ctx.fillStyle = '#ff4fa3';
     ctx.fillRect(largura / 2 - 18 * escala, chao - 56 * escala, 36 * escala, 56 * escala);
+
+    desenharReferencia(chao);
 
     if (!Musica.carregada) {
       ctx.fillStyle = 'rgba(243,236,255,.75)';

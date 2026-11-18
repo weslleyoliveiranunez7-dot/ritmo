@@ -102,7 +102,16 @@ const Musica = (() => {
     return freq;
   }
 
+  // Atraso entre o relógio do contexto e o som realmente saindo (quando o navegador informa).
+  function latenciaSaida() {
+    return ctx ? (ctx.outputLatency || ctx.baseLatency || 0) : 0;
+  }
+
   return {
+    latenciaSaida,
+    get contexto() { return ctx; },
+    get instanteInicio() { return inicio; },
+    get audioBuffer() { return buffer; },
     carregar, tocar, pausar, reiniciar, buscar, definirVolume, espectro, posicao,
     get tocando() { return tocando; },
     get duracao() { return buffer ? buffer.duration : 0; },
